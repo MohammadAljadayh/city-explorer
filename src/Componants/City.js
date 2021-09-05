@@ -3,19 +3,22 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 
-import {Form, Button,Row,Col,Table } from "react-bootstrap";
+import {Form, Button,Row,Col,Table,Image,Alert } from "react-bootstrap";
 
 class City extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
      locationData: "",
+     displayMap: false,
+     errorrMsg: "",
+     displayErrorr: false,
     };
   }
   getLocationFromApi = async (event) => {
     event.preventDefault();
 
-  
+  try {
       let targetLocation = event.target.targetLocation.value;
       let locationURL = `https://eu1.locationiq.com/v1/search.php?key=pk.d2a3a0e0cc39a01e35a94035f3566cec&q=${targetLocation}&format=json`;
       let locationResult = await axios.get(locationURL);
@@ -26,11 +29,19 @@ class City extends React.Component {
       
       this.setState({
         locationData:locationResult.data[0],
-  
+        displayMap: true,
       });
-     
     
+    
+  }
+ catch {
+  this.setState({
+    errorrMsg: "Error Unable to geocode",
+    displayErrorr: true,
+  });
+}
   };
+
   render() {
     return (
       <div>
@@ -77,9 +88,27 @@ class City extends React.Component {
     <td>location lon</td>
       <td><p>{this.state.locationData.lon}</p></td>
     </tr>
+    
+
   </tbody>
 </Table>
      
+<br /> 
+
+      <Alert  >
+        <Alert.Heading>{this.state.displayErrorr && this.state.errorrMsg}</Alert.Heading>
+    
+      </Alert>
+
+
+<br />
+{this.state.displayMap && (
+            <Image thumbnail
+              src={`https://maps.locationiq.com/v3/staticmap?key=pk.30819d0d14daf4a98f432c25d296412a&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=15&size=480x450&format=png&maptype=roadmap&markers=icon:small-red-cutout|${this.state.locationData.lat},${this.state.locationData.lon},&markers=icon:small-red-cutout|${this.state.locationData.lat},${this.state.locationData.lon}`}
+              alt="map"
+              roundedCircle
+            />
+          )}
         </div>
       </div>
     );

@@ -1,3 +1,5 @@
+Netlify Link : https://gracious-dubinsky-b0fc26.netlify.app/ 
+
 # City Explorer
 
 **Author**: Mohammad Aljadayh 
@@ -17,14 +19,15 @@ This website allows users to explore any location and display name of it with la
 
 using 
 - react 
--  axios
+- axios
 - API.
-- Bootstrap . 
+- Bootstrap. 
 
 ## Change Log
 
 
 ## Credit and Collaborations
+
 [ Axios](https://axios-http.com/docs/api_intro)
 
 [ locationiq](https://locationiq.com/)
