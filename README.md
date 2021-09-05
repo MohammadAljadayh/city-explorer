@@ -47,17 +47,17 @@ Name of feature: Add Request to API server
 
 Estimate of time needed to complete: 30 min
 
-Start time:2:20pm
+Start time:2:20pm . 
 
-Finish time: 3:20pm
+Finish time: 3:20pm . 
 
-Actual time needed to complete: 1 Hour to understand it 
+Actual time needed to complete: 1 Hour to understand it. 
 
 ----------------------------------------------------------------------------
 
 Name of feature:  writing  the rest of requrment in terlo  
 
-Estimate of time needed to complete: 2 Hours 
+Estimate of time needed to complete: 2 Hours. 
 
 Start time:8 pm
 
@@ -66,3 +66,4 @@ Finish time: 11 pm
 Actual time needed to complete: 40 min
 
 
+![](data flow.png)
