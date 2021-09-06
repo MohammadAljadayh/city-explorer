@@ -20,7 +20,7 @@ class City extends React.Component {
 
   try {
       let targetLocation = event.target.targetLocation.value;
-      let locationURL = `https://eu1.locationiq.com/v1/search.php?key=pk.d2a3a0e0cc39a01e35a94035f3566cec&q=${targetLocation}&format=json`;
+      let locationURL =`https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${targetLocation}&format=json`;
       let locationResult = await axios.get(locationURL);
     
       // console.log( locationResult.data);
