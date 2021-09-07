@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import Weather from "./weather";
 
 import {Form, Button,Row,Col,Table,Image,Alert } from "react-bootstrap";
 
@@ -10,6 +11,7 @@ class City extends React.Component {
     super(props);
     this.state = {
      locationData: "",
+     wheatherState:[],
      displayMap: false,
      errorrMsg: "",
      displayErrorr: false,
@@ -23,13 +25,17 @@ class City extends React.Component {
       let locationURL =`https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${targetLocation}&format=json`;
       let locationResult = await axios.get(locationURL);
     
-      // console.log( locationResult.data);
-      // console.log(this.state. locationData.lat);
-      //  console.log(this.state. locationData.lon);
+      let WeatherUrl =`${process.env.REACT_APP_SERVER_URL}/weather?city_name=${targetLocation}`;
+      let weatherObject = await axios.get(WeatherUrl);
+
+
+     
       
       this.setState({
         locationData:locationResult.data[0],
         displayMap: true,
+
+        wheatherState:weatherObject.data,
       });
     
     
@@ -43,6 +49,7 @@ class City extends React.Component {
   };
 
   render() {
+    console.log(this.state.wheatherState);
     return (
       <div>
         <Form onSubmit={this.getLocationFromApi} >
@@ -92,7 +99,11 @@ class City extends React.Component {
 
   </tbody>
 </Table>
-     
+{this.state.wheatherState.map(data => {  
+           return<Weather seeWeathetState={data} />
+          }
+          
+          )}
 <br /> 
 
       <Alert  >
@@ -103,12 +114,19 @@ class City extends React.Component {
 
 <br />
 {this.state.displayMap && (
-            <Image thumbnail
+            <Image 
               src={`https://maps.locationiq.com/v3/staticmap?key=pk.30819d0d14daf4a98f432c25d296412a&center=${this.state.locationData.lat},${this.state.locationData.lon}&zoom=15&size=480x450&format=png&maptype=roadmap&markers=icon:small-red-cutout|${this.state.locationData.lat},${this.state.locationData.lon},&markers=icon:small-red-cutout|${this.state.locationData.lat},${this.state.locationData.lon}`}
               alt="map"
               roundedCircle
+              thumbnail
             />
           )}
+
+          <br />
+
+       
+          
+
         </div>
       </div>
     );
