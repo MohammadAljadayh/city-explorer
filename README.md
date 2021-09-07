@@ -71,5 +71,3 @@ Actual time needed to complete: 40 min
 
 ![](data flow.png)
 
-REACT_APP_LOCATION_IQ_KEY=pk.1e3241be7d1698a9e8dc92c3d512e09f
-REACT_APP_SERVER_URL=http://localhost:3081
