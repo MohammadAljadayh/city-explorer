@@ -99,6 +99,7 @@ class City extends React.Component {
 
   </tbody>
 </Table>
+
 {this.state.wheatherState.map(data => {  
            return<Weather seeWeathetState={data} />
           }
