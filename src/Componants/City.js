@@ -1,9 +1,8 @@
 import React from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import Weather from "./weather";
-
+import Movies from "./Movies";
 import {Form, Button,Row,Col,Table,Image,Alert } from "react-bootstrap";
 
 class City extends React.Component {
@@ -15,6 +14,7 @@ class City extends React.Component {
      displayMap: false,
      errorrMsg: "",
      displayErrorr: false,
+     movies: [],
     };
   }
   getLocationFromApi = async (event) => {
@@ -25,16 +25,17 @@ class City extends React.Component {
       let locationURL =`https://eu1.locationiq.com/v1/search.php?key=${process.env.REACT_APP_LOCATION_IQ_KEY}&q=${targetLocation}&format=json`;
       let locationResult = await axios.get(locationURL);
     
-      let WeatherUrl =`${process.env.REACT_APP_SERVER_URL}/weather?city_name=${targetLocation}`;
+      let WeatherUrl =`${process.env.REACT_APP_SERVER_URL}/weather?lat=${locationResult.data[0].lat}&lon=${locationResult.data[0].lon}`;
       let weatherObject = await axios.get(WeatherUrl);
 
 
-     
-      
-      this.setState({
-        locationData:locationResult.data[0],
-        displayMap: true,
+      let movieUrl = `${process.env.REACT_APP_SERVER_URL}/movies?cityName=${ targetLocation}`;
+      let moviesName =await axios.get(movieUrl);
 
+      this.setState({
+      locationData:locationResult.data[0],
+        displayMap: true,
+        movies :moviesName.data,
         wheatherState:weatherObject.data,
       });
     
@@ -50,6 +51,7 @@ class City extends React.Component {
 
   render() {
     console.log(this.state.wheatherState);
+    console.log(this.state.movies);
     return (
       <div>
         <Form onSubmit={this.getLocationFromApi} >
@@ -99,12 +101,22 @@ class City extends React.Component {
 
   </tbody>
 </Table>
-{this.state.wheatherState.map(data => {  
+
+{this.state.wheatherState.map(data=> {  
            return<Weather seeWeathetState={data} />
           }
           
           )}
 <br /> 
+
+{/* {this.state.movies.map(data=> {  
+           return<Movies displayMovies={data} />
+          }
+          
+          )} */}
+
+< Movies displayMovies={this.state.movies} />
+
 
       <Alert  >
         <Alert.Heading>{this.state.displayErrorr && this.state.errorrMsg}</Alert.Heading>
