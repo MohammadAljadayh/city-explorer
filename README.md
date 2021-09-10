@@ -3,7 +3,7 @@ Netlify Link : https://gracious-dubinsky-b0fc26.netlify.app/
 # City Explorer
 
 **Author**: Mohammad Aljadayh 
-**Version**: 1.0.0
+**Version**: 1.0.2
 
 ## Overview
 
