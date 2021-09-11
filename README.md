@@ -3,7 +3,7 @@ Netlify Link : https://gracious-dubinsky-b0fc26.netlify.app/
 # City Explorer
 
 **Author**: Mohammad Aljadayh 
-**Version**: 1.0.2
+**Version**: 1.0.3
 
 ## Overview
 
@@ -69,5 +69,5 @@ Finish time: 11 pm
 Actual time needed to complete: 40 min
 
 
-![](data flow.png)
+
 
